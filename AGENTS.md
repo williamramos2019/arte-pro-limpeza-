@@ -2,23 +2,23 @@
 
 ## Cursor Cloud specific instructions
 
-### Project state (important)
-This repository is a **scaffold only**. It currently contains build/tooling config but **no application source code**:
-- Missing dirs/files referenced by `tsconfig.json`: `client/src`, `shared`, `server`, and there is no `index.html` or `vite.config.ts`.
-- `package.json` defines **no `dev`/`build`/`start` scripts** (only a placeholder `test` that always fails).
-
-So there is nothing meaningful to "run" yet. Once source code (an `index.html` entry + `client/src`) is added, the toolchain below works.
+### What this app is
+A single-page, mobile-first marketing site (in Portuguese) for **WR Soluções Digitais** — a clone of `https://resolve-digital-hub.lovable.app`. All CTAs deep-link to WhatsApp (`wa.me/5531980252882`). There is no backend; it is a static front-end.
 
 ### Stack
-Vite 7 + React 19 + TypeScript 5 + Tailwind CSS v4. Package manager is **npm** (`package-lock.json`). Node 22 is used here (`.replit` pins Replit's `nodejs-20` module, but v22 works fine).
+Vite 7 + React 19 + TypeScript 5 + Tailwind CSS **v4**. Package manager is **npm** (`package-lock.json`). Node 22 is used here (`.replit` pins Replit's `nodejs-20` module, but v22 works fine).
 
-### Running / building / checking
-- Dev server (no script defined, run the binary directly): `npx vite --host 0.0.0.0 --port 5000`
-  - Port 5000 matches `.replit`'s port mapping (`localPort = 5000` → externalPort 80).
-  - With no `index.html` present, the server boots but `/` returns 404 — expected until app source exists.
-- Type-check: `npx tsc --noEmit` (passes trivially while there are no source files).
-- No lint config or test runner is configured in the repo.
+### Layout
+- `index.html` (Vite entry, at repo root) → `/client/src/main.tsx`.
+- App code lives in `client/src/` (`App.tsx`, `components/`, `data.ts`, `index.css`). Path alias `@/*` → `client/src/*` (see `vite.config.ts` + `tsconfig.json`).
+- Service/shortcut content and the WhatsApp phone/email constants are centralized in `client/src/data.ts`.
 
-### Gotchas
-- `postcss.config.js` is ESM but `package.json` has no `"type": "module"`, so Vite logs a `MODULE_TYPELESS_PACKAGE_JSON` reparse warning. Harmless.
-- Tailwind v4 normally uses the `@tailwindcss/postcss` PostCSS plugin; this repo's `postcss.config.js` still uses the `tailwindcss` plugin key. Left as-is (existing config).
+### Running / building / checking (see `package.json` scripts)
+- Dev server: `npm run dev` (Vite on `0.0.0.0:5000`; port 5000 matches `.replit`'s mapping → externalPort 80).
+- Type-check: `npx tsc --noEmit`.
+- Production build: `npm run build` (`tsc && vite build`); preview with `npm run preview`.
+- No lint config or automated test runner is configured.
+
+### Gotchas (non-obvious)
+- Tailwind is **v4**: theme tokens (oklch colors, fonts, animations) are defined in CSS via `@theme` in `client/src/index.css` — there is no JS color config there. The legacy `tailwind.config.ts` is from the original scaffold and is essentially unused by v4's CSS-first setup.
+- PostCSS must use the **`@tailwindcss/postcss`** plugin (v4), already wired in `postcss.config.js`. The plain `tailwindcss` plugin key does not work under v4.
