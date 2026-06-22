@@ -1,4 +1,6 @@
 node_modules/
-dist/
 *.local
 .DS_Store
+
+# dist/ is intentionally committed so the compiled, ready-to-upload
+# static site (cPanel/HostGator) is available directly from the repo.
