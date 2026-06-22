@@ -13,6 +13,15 @@ const navItems = [
   { href: "/prestador/ana-limpeza", label: "Perfil", icon: UserRound },
 ];
 
+function isActiveRoute(location: string, href: string) {
+  if (href === "/") {
+    return location === "/";
+  }
+
+  const section = href.split("/")[1];
+  return location === href || location.startsWith(`/${section}/`);
+}
+
 export function AppShell({ children }: AppShellProps) {
   const [location] = useLocation();
 
@@ -25,7 +34,7 @@ export function AppShell({ children }: AppShellProps) {
         <ul className="mx-auto grid max-w-md grid-cols-4 gap-1 px-2 py-2">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const active = location === item.href;
+            const active = isActiveRoute(location, item.href);
 
             return (
               <li key={item.href}>
