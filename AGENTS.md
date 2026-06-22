@@ -19,6 +19,9 @@ Vite 7 + React 19 + TypeScript 5 + Tailwind CSS **v4**. Package manager is **npm
 - Production build: `npm run build` (`tsc && vite build`); preview with `npm run preview`.
 - No lint config or automated test runner is configured.
 
+### Deploy (static, no Node — e.g. cPanel/HostGator)
+`npm run build` outputs a fully static site to `dist/` (HTML/CSS/JS) — no server runtime needed. Build `base` is set to `./` (relative) in `vite.config.ts` so it works from `public_html` root or any subfolder. `public/.htaccess` (gzip, cache, optional HTTPS redirect, SPA fallback) and `public/favicon.svg` are copied into `dist/` automatically. Upload the contents of `dist/` into the hosting folder.
+
 ### Gotchas (non-obvious)
 - Tailwind is **v4**: theme tokens (oklch colors, fonts, animations) are defined in CSS via `@theme` in `client/src/index.css` — there is no JS color config there. The legacy `tailwind.config.ts` is from the original scaffold and is essentially unused by v4's CSS-first setup.
 - PostCSS must use the **`@tailwindcss/postcss`** plugin (v4), already wired in `postcss.config.js`. The plain `tailwindcss` plugin key does not work under v4.
