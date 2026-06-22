@@ -17,11 +17,9 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./client/src/*"],
-      "@assets/*": ["./attached_assets/*"],
-      "@shared/*": ["./shared/*"]
+      "@/*": ["./src/*"]
     }
   },
-  "include": ["client/src", "shared", "server"],
+  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
