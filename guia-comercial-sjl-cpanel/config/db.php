@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 // Edite estes dados depois de criar o banco e o usuario no cPanel.
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'guia_sjl');
-define('DB_USER', 'ubuntu');
-define('DB_PASS', 'ubuntu');
+define('DB_NAME', 'nome_do_banco');
+define('DB_USER', 'usuario_do_banco');
+define('DB_PASS', 'senha_do_banco');
 define('DB_CHARSET', 'utf8mb4');
 
 function db(): PDO
