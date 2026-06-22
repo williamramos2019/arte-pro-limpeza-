@@ -20,7 +20,7 @@ Vite 7 + React 19 + TypeScript 5 + Tailwind CSS **v4**. Package manager is **npm
 - No lint config or automated test runner is configured.
 
 ### Deploy (static, no Node — e.g. cPanel/HostGator)
-`npm run build` outputs a fully static site to `dist/` (HTML/CSS/JS) — no server runtime needed. Build `base` is set to `./` (relative) in `vite.config.ts` so it works from `public_html` root or any subfolder. `public/.htaccess` (gzip, cache, optional HTTPS redirect, SPA fallback) and `public/favicon.svg` are copied into `dist/` automatically. Upload the contents of `dist/` into the hosting folder.
+`npm run build` outputs a fully static site to `dist/` (HTML/CSS/JS) — no server runtime needed. Build `base` is set to `./` (relative) in `vite.config.ts` so it works from `public_html` root or any subfolder. `public/.htaccess` (gzip, cache, optional HTTPS redirect, SPA fallback) and `public/favicon.svg` are copied into `dist/` automatically. Upload the contents of `dist/` into the hosting folder. Fonts (Inter/Sora) are **self-hosted** via `@fontsource` (imported in `client/src/main.tsx`) and bundled into `dist/assets/` — no Google Fonts CDN, so the site works fully offline. Note: `dist/` is intentionally committed to the repo (build output) so the ready-to-upload bundle is available without building.
 
 ### Gotchas (non-obvious)
 - Tailwind is **v4**: theme tokens (oklch colors, fonts, animations) are defined in CSS via `@theme` in `client/src/index.css` — there is no JS color config there. The legacy `tailwind.config.ts` is from the original scaffold and is essentially unused by v4's CSS-first setup.
