@@ -1,7 +1,14 @@
 import { MessageCircle } from "lucide-react";
 import { whatsappLink } from "@/data";
+import ThemeToggle from "@/components/ThemeToggle";
+import type { Theme } from "@/hooks/useTheme";
 
-export default function Header() {
+interface HeaderProps {
+  theme: Theme;
+  onToggleTheme: () => void;
+}
+
+export default function Header({ theme, onToggleTheme }: HeaderProps) {
   return (
     <header className="sticky top-0 z-30 border-b border-border/60 bg-surface/85 backdrop-blur-md">
       <div className="flex items-center justify-between px-5 py-3">
@@ -20,15 +27,18 @@ export default function Header() {
           </span>
         </a>
 
-        <a
-          href={whatsappLink("Olá! Vim pelo site da WR Soluções Digitais.")}
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Falar no WhatsApp"
-          className="grid h-11 w-11 place-items-center rounded-full bg-gradient-accent text-accent-foreground shadow-lg shadow-accent/30 transition-transform active:scale-95"
-        >
-          <MessageCircle className="h-5 w-5" />
-        </a>
+        <div className="flex items-center gap-2">
+          <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+          <a
+            href={whatsappLink("Olá! Vim pelo site da WR Soluções Digitais.")}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Falar no WhatsApp"
+            className="grid h-11 w-11 place-items-center rounded-full bg-gradient-accent text-accent-foreground shadow-lg shadow-accent/30 transition-transform active:scale-95"
+          >
+            <MessageCircle className="h-5 w-5" />
+          </a>
+        </div>
       </div>
     </header>
   );
